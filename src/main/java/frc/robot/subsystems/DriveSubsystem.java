@@ -11,6 +11,7 @@ import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants.DriveConstants;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -141,7 +142,8 @@ public class DriveSubsystem extends SubsystemBase {
    * @param fieldRelative Whether the provided x and y speeds are relative to the field.
    * @param speedMultiplier Speed mulitplier, clamped between 0.0 and 1.0.
    */
-  public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative, double speedMultiplier) {
+  public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative, XboxController controller) {
+    double speedMultiplier = controller.getLeftTriggerAxis()*-.5 + .5 + controller.getRightTriggerAxis()*.5;
     speedMultiplier = Math.max(speedMultiplier, 0.0);
     speedMultiplier = Math.min(speedMultiplier, 1.0);
 
