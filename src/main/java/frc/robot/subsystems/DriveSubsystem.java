@@ -133,6 +133,22 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   /**
+   * Method to drive the robot using joystick info, with a speed multiplier.
+   *
+   * @param xSpeed Speed of the robot in the x direction (forward).
+   * @param ySpeed Speed of the robot in the y direction (sideways).
+   * @param rot Angular rate of the robot.
+   * @param fieldRelative Whether the provided x and y speeds are relative to the field.
+   * @param speedMultiplier Speed mulitplier, clamped between 0.0 and 1.0.
+   */
+  public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative, double speedMultiplier) {
+    speedMultiplier = Math.max(speedMultiplier, 0.0);
+    speedMultiplier = Math.min(speedMultiplier, 1.0);
+
+    drive(xSpeed * speedMultiplier, ySpeed * speedMultiplier, rot, fieldRelative);
+  }
+
+  /**
    * Sets the swerve ModuleStates.
    *
    * @param desiredStates The desired SwerveModule states.
